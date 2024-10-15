@@ -10,7 +10,8 @@ const styles = StyleSheet.create({
         borderColor: theme.color.secondary,
         borderWidth: 1,
         borderRadius: theme.units.md,
-        overflow: 'hidden'
+        overflow: 'hidden',
+        backgroundColor: theme.color.surface
 
     },
     top: {

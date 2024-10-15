@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
         color: theme.textColor.default,
         overflow: 'hidden',
         borderWidth: 1,
-        borderColor: '#eee',
+        borderColor: theme.color.secondary,
         backgroundColor: 'transparent',
     },
     small: {

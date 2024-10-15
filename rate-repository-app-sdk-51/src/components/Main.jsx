@@ -14,10 +14,8 @@ const styles = StyleSheet.create({
     main: {
         flexGrow: 1,
         flexShrink: 1,
-        padding: theme.units.sm
-    },
-    h1: {
-        marginBottom: 12
+        paddingHorizontal: theme.units.sm,
+        backgroundColor: theme.color.surface
     }
 });
 
