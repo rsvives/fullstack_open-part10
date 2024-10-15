@@ -1,34 +1,37 @@
-import { Alert, Image, Pressable, StyleSheet, Text, View } from "react-native"
+import { Alert, Image, Pressable, StyleSheet, View } from "react-native"
+import { Text } from "./Text"
+import { theme } from "../../theme"
+import { Chip } from "./Chip"
+
 const styles = StyleSheet.create({
     container: {
-        padding: 12,
+        padding: theme.units.md,
         width: '100%',
-        borderColor: '#eee',
+        borderColor: theme.color.secondary,
         borderWidth: 1,
-        borderRadius: 12,
+        borderRadius: theme.units.md,
         overflow: 'hidden'
 
     },
     top: {
-        gap: 16,
+        gap: theme.units.lg,
         flexDirection: 'row',
-        paddingBottom: 12,
+        paddingBottom: theme.units.md,
         flex: 1
     },
     textContainer: {
         flexGrow: 1,
         flexShrink: 1,
-        gap: 8,
+        gap: theme.units.sm,
         width: 'auto',
     },
     imgContainer: {
         height: 64,
         width: 64,
         overflow: 'hidden',
-        borderRadius: 32,
+        borderRadius: theme.units.xxl,
         borderWidth: 1,
-        borderColor: '#eee',
-        // backgroundColor: '#eee',
+        borderColor: theme.color.secondary,
     },
     img: {
         width: '100%',
@@ -41,34 +44,20 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center'
     },
-    title: {
-        fontSize: 16,
-        fontWeight: '600'
-    },
-    description: {
-        fontSize: 14,
-        color: '#666'
-    },
-    tag: {
-        paddingHorizontal: 12,
-        paddingVertical: 8,
-        borderRadius: 16,
-        overflow: 'hidden',
-        fontSize: 11,
-        borderWidth: 1,
-        borderColor: '#eee',
-        // backgroundColor: '#eee',
-    },
+
     footer: {
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        gap: 8,
+        gap: theme.units.sm,
         borderTopWidth: 1,
-        borderColor: '#eee',
-        paddingTop: 12
+        borderColor: theme.color.secondary,
+        paddingTop: theme.units.md
 
     }
 })
+
+const formatDigits = (number) => (number / 1000).toFixed(1) + 'k'
+
 export const RepositoryItem = ({ repo }) => {
     return (
         <View style={styles.container}>
@@ -76,17 +65,17 @@ export const RepositoryItem = ({ repo }) => {
                 <View style={styles.imgContainer}><Image source={{ uri: repo.ownerAvatarUrl }} style={styles.img} /></View>
                 <View style={styles.textContainer}>
                     <View style={styles.header}>
-                        <Text style={styles.title}>{repo.fullName}</Text>
-                        <Text style={{ ...styles.tag, backgroundColor: '#eee' }}>{repo.language}</Text>
+                        <Text size={'h4'}>{repo.fullName}</Text>
+                        <Chip size={'small'} color={'secondary'}>{repo.language}</Chip>
                     </View>
-                    <Text style={styles.description}>{repo.description}</Text>
+                    <Text size={'body2'} color={'lighter'}>{repo.description}</Text>
                 </View>
             </View>
             <View style={styles.footer}>
-                <Pressable onPress={() => Alert.alert(`${repo.stargazersCount} stars ⭐️`)}><Text style={styles.tag}>{repo.stargazersCount} ⭐️</Text></Pressable>
-                <Pressable onPress={() => Alert.alert(`${repo.forksCount} forks 🔱`)}><Text style={styles.tag}>{repo.forksCount} 🔱</Text></Pressable>
-                <Pressable onPress={() => Alert.alert(`${repo.ratingAverage} rating 🥇`)}><Text style={styles.tag}>{repo.ratingAverage} 🥇</Text></Pressable>
-                <Pressable onPress={() => Alert.alert(`${repo.reviewCount} reviews 📊`)}><Text style={styles.tag}>{repo.reviewCount} 📊</Text></Pressable>
+                <Pressable onPress={() => Alert.alert(`${repo.stargazersCount} stars ⭐️`)}><Chip>{formatDigits(repo.stargazersCount)} ⭐️</Chip></Pressable>
+                <Pressable onPress={() => Alert.alert(`${repo.forksCount} forks 🔱`)}><Chip>{formatDigits(repo.forksCount)} 🔱</Chip></Pressable>
+                <Pressable onPress={() => Alert.alert(`${repo.ratingAverage} rating 🥇`)}><Chip>{repo.ratingAverage} 🥇</Chip></Pressable>
+                <Pressable onPress={() => Alert.alert(`${repo.reviewCount} reviews 📊`)}><Chip>{repo.reviewCount} 📊</Chip></Pressable>
             </View>
         </View>
 
