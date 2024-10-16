@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     main: {
         flexGrow: 1,
         flexShrink: 1,
-        paddingHorizontal: theme.units.sm,
+        padding: theme.units.sm,
         backgroundColor: theme.color.surface
     }
 });
@@ -24,14 +24,13 @@ const Main = () => {
 
         <View style={styles.container}>
             <AppBar />
-            <Routes>
-                <Route path='/' element={<RepositoryList />} />
-                <Route path='/sign-in' element={<SignIn />} />
-                <Route path='*' element={<Navigate to={'/'} replace />} />
-            </Routes>
-            {/* <View style={styles.main}>
-
-            </View> */}
+            <View style={styles.main}>
+                <Routes >
+                    <Route path='/' element={<RepositoryList />} />
+                    <Route path='/sign-in' element={<SignIn />} />
+                    <Route path='*' element={<Navigate to={'/'} replace />} />
+                </Routes>
+            </View>
         </View>
     );
 };

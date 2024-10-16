@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     },
     list: {
         width: '100%',
-        marginTop: theme.units.md
+        // marginTop: theme.units.md
     }
 
 })

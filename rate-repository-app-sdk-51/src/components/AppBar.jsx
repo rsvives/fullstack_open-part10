@@ -24,8 +24,8 @@ export const AppBar = ({ children }) => {
     return (
         <View style={styles.container}>
             <Text size={'h1'} color={'white'} style={{ marginTop: theme.units.lg }}>Github Repos 🚀⚛️</Text>
-            <ScrollView horizontal>
-                <Link to={'/'}><Chip color={'primary'}>Repositories</Chip></Link>
+            <ScrollView horizontal >
+                <Link to={'/'} style={{ marginRight: theme.units.md }}><Chip color={'primary'}>Repositories</Chip></Link>
                 <Link to={'/sign-in'}><Chip color={'primary'}>SignIn</Chip></Link>
             </ScrollView>
         </View>
