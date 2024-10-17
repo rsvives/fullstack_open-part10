@@ -3,9 +3,7 @@ import { theme } from "../../theme"
 
 const styles = StyleSheet.create({
     ...theme.text,
-    textColor: {
-        ...theme.textColor,
-    }
+    color: theme.textColor,
 
 
 })
@@ -21,9 +19,10 @@ export const Text = ({ size, color, style, ...props }) => {
         size === 'body2' && styles.body2,
         size === 'button' && styles.button,
         size === 'caption' && styles.caption,
-        color === 'lighter' && styles.textColor.lighter,
-        color === 'default' && styles.textColor.default,
-        color === 'white' && styles.textColor.white,
+        color === 'lighter' && { color: styles.color.lighter },
+        color === 'default' && { color: styles.color.default },
+        color === 'white' && { color: styles.color.white },
+        color === 'error' && { color: styles.color.error },
         style
     ]
 

@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     },
     backgroundColorPrimary: {
         backgroundColor: theme.color.primary,
-        color: theme.textColor.white.color,
+        color: theme.textColor.white,
     },
     backgroundColorSecondary: {
         backgroundColor: theme.color.secondary,
