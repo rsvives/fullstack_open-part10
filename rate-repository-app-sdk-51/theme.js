@@ -63,7 +63,7 @@ export const theme = {
         main: Platform.select({
             ios: 'Arial',
             android: 'Roboto',
-            default: 'System'
+            default: 'System',
         })
     }
 }

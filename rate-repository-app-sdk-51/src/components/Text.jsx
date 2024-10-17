@@ -4,14 +4,14 @@ import { theme } from "../../theme"
 const styles = StyleSheet.create({
     ...theme.text,
     color: theme.textColor,
-    fontFamily: theme.font.main
+    fontFamily: { fontFamily: theme.font.main }
 
 })
 
 export const Text = ({ size, color, style, ...props }) => {
     const textStyle = [
         styles.body1,
-        { fontFamily: styles.fontFamily },
+        styles.fontFamily,
         size === 'h1' && styles.h1,
         size === 'h2' && styles.h2,
         size === 'h3' && styles.h3,
