@@ -1,16 +1,17 @@
-import { Text as NativeText, StyleSheet } from "react-native"
+import { Text as NativeText, Platform, StyleSheet } from "react-native"
 import { theme } from "../../theme"
 
 const styles = StyleSheet.create({
     ...theme.text,
     color: theme.textColor,
-
+    fontFamily: theme.font.main
 
 })
 
 export const Text = ({ size, color, style, ...props }) => {
     const textStyle = [
         styles.body1,
+        { fontFamily: styles.fontFamily },
         size === 'h1' && styles.h1,
         size === 'h2' && styles.h2,
         size === 'h3' && styles.h3,

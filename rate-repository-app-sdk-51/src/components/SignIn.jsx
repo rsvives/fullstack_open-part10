@@ -105,7 +105,7 @@ const SignInForm = ({ onSubmit }) => {
 
                 <Pressable style={[styles.input, styles.buttonPrimary]} onPress={formik.handleSubmit}><Text color={'white'} size={'button'} style={{ textAlign: 'center' }}>Submit</Text></Pressable>
             </View>
-        </View>
+        </View >
     )
 }
 
