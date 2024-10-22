@@ -114,7 +114,7 @@ const SignInForm = ({ onSubmit }) => {
 
 
 export const SignIn = () => {
-    const [signIn] = useSignIn()
+    const { signIn } = useSignIn()
 
     const onSubmit = async (values) => {
         console.log(values)
