@@ -9,6 +9,7 @@ const apolloClient = createApolloClient()
 
 export default function App() {
 
+
   return (
     <>
       <NativeRouter>

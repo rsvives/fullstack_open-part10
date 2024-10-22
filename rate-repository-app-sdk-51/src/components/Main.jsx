@@ -5,6 +5,10 @@ import { RepositoryList } from './RepositoryList';
 import { theme } from '../../theme';
 import { AppBar } from './AppBar';
 import { SignIn } from './SignIn';
+import { authStorage } from '../utils/authStorage';
+import { useSignIn } from '../hooks/useSignIn';
+import { useEffect } from 'react';
+
 
 const styles = StyleSheet.create({
     container: {
@@ -19,7 +23,14 @@ const styles = StyleSheet.create({
     }
 });
 
+
+
 const Main = () => {
+
+    const { token } = useSignIn()
+
+    console.log('token', token)
+
     return (
 
         <View style={styles.container}>

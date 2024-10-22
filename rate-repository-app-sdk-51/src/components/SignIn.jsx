@@ -3,9 +3,8 @@ import { View, TextInput, Pressable, StyleSheet } from "react-native";
 import { Text } from "./Text";
 import { useFormik } from "formik";
 import { theme } from "../../theme";
-import { useMutation } from '@apollo/client';
-import { AUTHENTICATE } from '../graphql/mutations';
 import { useSignIn } from '../hooks/useSignIn';
+import { authStorage } from '../utils/authStorage';
 
 
 const styles = StyleSheet.create({
@@ -122,7 +121,8 @@ export const SignIn = () => {
         const { username, password } = values
         try {
             const { data } = await signIn({ username, password })
-            console.log(data)
+            const { accessToken } = data.authenticate
+            await authStorage.setAccessToken(accessToken)
         } catch (e) {
             console.error(e)
         }
