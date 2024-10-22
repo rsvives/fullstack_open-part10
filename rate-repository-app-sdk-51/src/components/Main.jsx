@@ -5,9 +5,7 @@ import { RepositoryList } from './RepositoryList';
 import { theme } from '../../theme';
 import { AppBar } from './AppBar';
 import { SignIn } from './SignIn';
-import { authStorage } from '../utils/authStorage';
 import { useSignIn } from '../hooks/useSignIn';
-import { useEffect } from 'react';
 
 
 const styles = StyleSheet.create({

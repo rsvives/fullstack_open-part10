@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { authStorage } from "../utils/authStorage";
 
 export const useSignIn = () => {
-    // const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [token, setToken] = useState('')
 
     const [authenticate, result] = useMutation(AUTHENTICATE, {
@@ -22,10 +22,11 @@ export const useSignIn = () => {
                 setIsLoggedIn(true)
                 setToken(result)
             }
+
         }
         checkToken()
 
     }, [])
 
-    return { signIn, result, token }
+    return { signIn, result, token, isLoggedIn }
 }
