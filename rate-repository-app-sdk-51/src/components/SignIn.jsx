@@ -3,6 +3,9 @@ import { View, TextInput, Pressable, StyleSheet } from "react-native";
 import { Text } from "./Text";
 import { useFormik } from "formik";
 import { theme } from "../../theme";
+import { useMutation } from '@apollo/client';
+import { AUTHENTICATE } from '../graphql/mutations';
+import { useSignIn } from '../hooks/useSignIn';
 
 
 const styles = StyleSheet.create({
@@ -50,11 +53,11 @@ const validationSchema = yup.object().shape({
         .required('Username is required')
     ,
     password: yup.string()
-        .matches(/\w*[a-z]\w*/, "Password must have a small letter")
-        .matches(/\w*[A-Z]\w*/, "Password must have a capital letter")
-        .matches(/\d/, "Password must have a number")
-        .matches(/[!@#$%^&*()\-_"=+{}; :,<.>]/, "Password must have a special character")
-        .min(8, ({ min }) => `Password has to be at least ${min} characters long`)
+        // .matches(/\w*[a-z]\w*/, "Password must have a small letter")
+        // .matches(/\w*[A-Z]\w*/, "Password must have a capital letter")
+        // .matches(/\d/, "Password must have a number")
+        // .matches(/[!@#$%^&*()\-_"=+{}; :,<.>]/, "Password must have a special character")
+        // .min(8, ({ min }) => `Password has to be at least ${min} characters long`)
         .required('password is required')
 })
 
@@ -112,9 +115,17 @@ const SignInForm = ({ onSubmit }) => {
 
 
 export const SignIn = () => {
+    const [signIn] = useSignIn()
 
-    const onSubmit = (values) => {
-        console.log(values);
+    const onSubmit = async (values) => {
+        console.log(values)
+        const { username, password } = values
+        try {
+            const { data } = await signIn({ username, password })
+            console.log(data)
+        } catch (e) {
+            console.error(e)
+        }
     }
 
     return (<SignInForm onSubmit={onSubmit} />)

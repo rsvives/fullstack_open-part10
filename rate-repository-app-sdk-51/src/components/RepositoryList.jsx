@@ -20,8 +20,7 @@ const ItemSeparator = () => <View style={styles.separator} />
 export const RepositoryList = () => {
 
     const { repositories, loading } = useRepositories()
-    // const { data: repositories, error, loading } = useQuery(GET_REPOSITORIES)
-    // 
+
     return (
         loading ? <Text>Loading...</Text> :
             <FlatList

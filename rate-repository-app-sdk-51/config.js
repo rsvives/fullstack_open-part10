@@ -1,1 +1,0 @@
-export const LOCALHOST = '192.168.1.2'

@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react"
-import { LOCALHOST } from '../../config'
 import { useQuery } from "@apollo/client"
 import { GET_REPOSITORIES } from "../graphql/queries"
 
