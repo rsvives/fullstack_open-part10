@@ -24,3 +24,12 @@ export const GET_USERS = gql`
     }
   }
 `
+
+export const ME = gql`
+query Me{
+  me {
+    id
+    username
+  }
+}
+`

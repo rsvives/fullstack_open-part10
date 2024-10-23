@@ -1,9 +1,10 @@
-import { ApolloClient, useApolloClient, useMutation } from "@apollo/client";
+import { ApolloClient, useApolloClient, useMutation, useQuery } from "@apollo/client";
 import { AUTHENTICATE } from "../graphql/mutations";
 import { useState } from "react";
 import { useAuthStorage } from "./useAuthStorage";
 import { useNavigate } from "react-router-native";
 import { Alert } from "react-native";
+import { ME } from "../graphql/queries";
 
 
 
@@ -12,6 +13,7 @@ export const useSignIn = () => {
     const authStorage = useAuthStorage()
     const navigate = useNavigate()
     const apolloClient = useApolloClient()
+
 
     // const [isLoggedIn, setIsLoggedIn] = useState(false)
     // const [token, setToken] = useState('')
@@ -28,9 +30,14 @@ export const useSignIn = () => {
         } catch (e) {
             throw new Error('Invalid username or password', e)
         }
-
+    }
+    const logOut = async () => {
+        console.log('logout')
+        await authStorage.removeAccessToken()
+        await apolloClient.resetStore()
+        navigate('/', { replace: true })
     }
 
 
-    return [signIn, result]
+    return { signIn, result, logOut }
 }
