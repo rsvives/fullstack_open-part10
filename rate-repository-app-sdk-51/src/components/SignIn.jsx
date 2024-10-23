@@ -4,7 +4,7 @@ import { Text } from "./Text";
 import { useFormik } from "formik";
 import { theme } from "../../theme";
 import { useSignIn } from '../hooks/useSignIn';
-import { authStorage } from '../utils/authStorage';
+import { useState } from 'react';
 
 
 const styles = StyleSheet.create({
@@ -60,7 +60,7 @@ const validationSchema = yup.object().shape({
         .required('password is required')
 })
 
-const SignInForm = ({ onSubmit }) => {
+const SignInForm = ({ onSubmit, error }) => {
 
     const formik = useFormik({
         initialValues,
@@ -68,7 +68,6 @@ const SignInForm = ({ onSubmit }) => {
         onSubmit
     })
 
-    // const hasError =[name] && touched[name]
 
     return (
         <View style={styles.container}>
@@ -106,6 +105,7 @@ const SignInForm = ({ onSubmit }) => {
                     <Text color={'error'}>{formik.errors.password}</Text>}
 
                 <Pressable style={[styles.input, styles.buttonPrimary]} onPress={formik.handleSubmit}><Text color={'white'} size={'button'} style={{ textAlign: 'center' }}>Submit</Text></Pressable>
+                {error && <Text color={'error'} style={{ textAlign: 'center' }}>{error}</Text>}
             </View>
         </View >
     )
@@ -114,19 +114,21 @@ const SignInForm = ({ onSubmit }) => {
 
 
 export const SignIn = () => {
-    const { signIn } = useSignIn()
+    const [signIn] = useSignIn()
+    const [error, setError] = useState(null)
+
 
     const onSubmit = async (values) => {
         console.log(values)
         const { username, password } = values
         try {
-            const { data } = await signIn({ username, password })
-            const { accessToken } = data.authenticate
-            await authStorage.setAccessToken(accessToken)
+            await signIn({ username, password })
+            setError(null)
         } catch (e) {
-            console.error(e)
+            console.error('error', e)
+            setError(e.message)
         }
     }
 
-    return (<SignInForm onSubmit={onSubmit} />)
+    return (<SignInForm error={error} onSubmit={onSubmit} />)
 }

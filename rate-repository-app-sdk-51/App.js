@@ -5,7 +5,11 @@ import { StatusBar } from "react-native";
 import { createApolloClient } from "./src/utils/apolloClient";
 import { ApolloProvider } from "@apollo/client";
 
-const apolloClient = createApolloClient()
+import { authStorage } from "./src/utils/authStorage";
+import { AuthStorageContext } from "./src/context/AuthStorageContext";
+
+const apolloClient = createApolloClient(authStorage)
+
 
 export default function App() {
 
@@ -14,7 +18,9 @@ export default function App() {
     <>
       <NativeRouter>
         <ApolloProvider client={apolloClient}>
-          <Main />
+          <AuthStorageContext.Provider value={authStorage}>
+            <Main />
+          </AuthStorageContext.Provider>
         </ApolloProvider>
       </NativeRouter>
       <StatusBar style="auto" />

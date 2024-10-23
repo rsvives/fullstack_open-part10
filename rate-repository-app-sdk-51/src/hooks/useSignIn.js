@@ -1,32 +1,36 @@
-import { useMutation } from "@apollo/client";
+import { ApolloClient, useApolloClient, useMutation } from "@apollo/client";
 import { AUTHENTICATE } from "../graphql/mutations";
-import { useEffect, useState } from "react";
-import { authStorage } from "../utils/authStorage";
+import { useState } from "react";
+import { useAuthStorage } from "./useAuthStorage";
+import { useNavigate } from "react-router-native";
+import { Alert } from "react-native";
+
+
 
 export const useSignIn = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const [token, setToken] = useState('')
 
-    const [authenticate, result] = useMutation(AUTHENTICATE, {
-        // onError: (error) => console.error(error)
-    })
+    const authStorage = useAuthStorage()
+    const navigate = useNavigate()
+    const apolloClient = useApolloClient()
+
+    // const [isLoggedIn, setIsLoggedIn] = useState(false)
+    // const [token, setToken] = useState('')
+
+    const [authenticate, result] = useMutation(AUTHENTICATE)
 
     const signIn = async ({ username, password }) => {
-        return await authenticate({ variables: { username, password } })
+        try {
+            const { data } = await authenticate({ variables: { username, password } })
+            const { accessToken } = data.authenticate
+            await authStorage.setAccessToken(accessToken)
+            apolloClient.resetStore()
+            navigate('/', { replace: true })
+        } catch (e) {
+            throw new Error('Invalid username or password', e)
+        }
+
     }
 
-    useEffect(() => {
-        const checkToken = async () => {
-            const result = await authStorage.getAccessToken()
-            if (result) {
-                setIsLoggedIn(true)
-                setToken(result)
-            }
 
-        }
-        checkToken()
-
-    }, [])
-
-    return { signIn, result, token, isLoggedIn }
+    return [signIn, result]
 }

@@ -6,6 +6,8 @@ import { theme } from '../../theme';
 import { AppBar } from './AppBar';
 import { SignIn } from './SignIn';
 import { useSignIn } from '../hooks/useSignIn';
+import { useContext, useEffect } from 'react';
+import { AuthStorageContext } from '../context/AuthStorageContext';
 
 
 const styles = StyleSheet.create({
@@ -25,9 +27,6 @@ const styles = StyleSheet.create({
 
 const Main = () => {
 
-    const { token } = useSignIn()
-
-    console.log('token', token)
 
     return (
 
