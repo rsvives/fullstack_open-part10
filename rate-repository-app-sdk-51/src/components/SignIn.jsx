@@ -78,10 +78,17 @@ const SignInForm = ({ onSubmit, error }) => {
                         styles.input,
                         formik.touched.username && formik.errors.username && styles.inputError
                     ]}
-                    inputMode='text'
+
+                    inputMode='email'
                     placeholder="Username"
+                    returnKeyType='next'
+                    onSubmitEditing={() => console.log('end ed')
+                    }
+                    keyboardType='web-search'
+                    autoComplete='username'
+                    autoFocus
                     value={formik.values.username}
-                    onChange={formik.handleChange('username')}
+                    onChangeText={formik.handleChange('username')}
                     onBlur={formik.handleBlur('username')}
                 />
 
@@ -95,9 +102,10 @@ const SignInForm = ({ onSubmit, error }) => {
                     ]}
                     inputMode='text'
                     secureTextEntry
+                    returnKeyType='go'
                     value={formik.values.password}
                     placeholder="Password"
-                    onChange={formik.handleChange('password')}
+                    onChangeText={formik.handleChange('password')}
                     onBlur={formik.handleBlur('password')}
                 />
 

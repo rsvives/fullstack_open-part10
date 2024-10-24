@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         paddingBottom: theme.units.md,
         backgroundColor: theme.color.primary,
         color: theme.textColor.white,
-        paddingTop: theme.units.lg
+        // paddingTop: theme.units.lg
         // ...
     },
     // ...

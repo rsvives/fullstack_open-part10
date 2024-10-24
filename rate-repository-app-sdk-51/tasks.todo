@@ -1,0 +1,12 @@
+part d:
+    ☐ 10.17: @est(30m) test respository container renders all info @started(24-10-24 21:04)
+    ☐ 10.18: @est(30m) test signin form calls onsubmit 
+    ☐ 10.19: @est(30m) single repo view with "open in Github" button
+    ☐ 10.20: @est(45m) add reviews to  single repo
+    ☐ 10.21: @est(45m) new review form
+    ☐ 10.22: @est(30m) sign up form 
+    ☐ 10.23: @est(15m) sorting repos
+    ☐ 10.24: @est(30m) filtering repos
+    ☐ 10.25: @est(30m) logged user review view
+    ☐ 10.26: @est(15m) reviews actions (view & delete)
+    ☐ 10.27: @est(30m) Infinite scroll 
