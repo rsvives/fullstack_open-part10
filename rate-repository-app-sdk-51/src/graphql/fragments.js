@@ -15,4 +15,16 @@ fragment RepositoryDetails on Repository{
     reviewCount,
     stargazersCount,
 }
+`
+export const REVIEW_DETAILS = gql`
+fragment ReviewDetails on Review{
+          id
+          text
+          rating
+          createdAt
+          user {
+            id
+            username
+          }
+}
 ` 

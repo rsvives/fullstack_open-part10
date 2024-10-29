@@ -126,7 +126,7 @@ export const SignIn = () => {
     const [error, setError] = useState(null)
 
     const onSubmit = async (values) => {
-        console.log(values)
+        // console.log(values)
         const { username, password } = values
         try {
             await signIn({ username, password })
