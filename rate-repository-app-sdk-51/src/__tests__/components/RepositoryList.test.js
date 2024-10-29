@@ -1,6 +1,7 @@
 import { render, screen, within } from "@testing-library/react-native";
 import { RepositoryContainer, RepositoryList } from "../../components/RepositoryList";
 import { formatDigits } from "../../components/RepositoryItem";
+import { NativeRouter } from "react-router-native";
 
 describe('RepositoryList', () => {
     describe('RepositoryListContainer', () => {
@@ -48,7 +49,11 @@ describe('RepositoryList', () => {
                 ],
             };
             const mappedRepos = repositories.edges.map(r => r.node) // need to map here repos because they are mapped on useRepositories hook
-            render(<RepositoryContainer repositories={mappedRepos} />)
+            render(
+                <NativeRouter>
+                    <RepositoryContainer repositories={mappedRepos} />
+                </NativeRouter>
+            )
             // screen.debug()
 
             const repositoryItems = screen.getAllByTestId('repositoryItem');

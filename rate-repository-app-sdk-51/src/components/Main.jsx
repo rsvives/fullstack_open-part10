@@ -1,4 +1,4 @@
-import { Route, Routes, Navigate } from 'react-router-native';
+import { Route, Routes, Navigate, useMatch } from 'react-router-native';
 import { StyleSheet, View } from 'react-native';
 import { RepositoryList } from './RepositoryList';
 
@@ -8,6 +8,7 @@ import { SignIn } from './SignIn';
 import { useSignIn } from '../hooks/useSignIn';
 import { useContext, useEffect } from 'react';
 import { AuthStorageContext } from '../context/AuthStorageContext';
+import { RepositoryView } from './RepositoryView';
 
 
 const styles = StyleSheet.create({
@@ -27,7 +28,8 @@ const styles = StyleSheet.create({
 
 const Main = () => {
 
-
+    const match = useMatch('/repositories/:id')
+    const repoId = match?.params.id
     return (
 
         <View style={styles.container}>
@@ -36,6 +38,7 @@ const Main = () => {
                 <Routes >
                     <Route path='/' element={<RepositoryList />} />
                     <Route path='/sign-in' element={<SignIn />} />
+                    <Route path="/repositories/:id" element={<RepositoryView />} />
                     <Route path='*' element={<Navigate to={'/'} replace />} />
                 </Routes>
             </View>

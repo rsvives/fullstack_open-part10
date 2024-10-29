@@ -2,27 +2,19 @@ import { Alert, Image, Pressable, StyleSheet, View } from "react-native"
 import { Text } from "./Text"
 import { theme } from "../../theme"
 import { Chip } from "./Chip"
+import { Separator } from "./Separator"
 
 const styles = StyleSheet.create({
-    container: {
-        padding: theme.units.md,
-        width: '100%',
-        borderColor: theme.color.secondary,
-        borderWidth: 1,
-        borderRadius: theme.units.md,
-        overflow: 'hidden',
-        backgroundColor: theme.color.surface
 
-    },
     top: {
         gap: theme.units.lg,
         flexDirection: 'row',
-        paddingBottom: theme.units.md,
-        flex: 1
+        // flexShrink: 1
     },
     textContainer: {
         flexGrow: 1,
         flexShrink: 1,
+        // flexBasis: '100%',
         gap: theme.units.sm,
         width: 'auto',
     },
@@ -52,10 +44,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         gap: theme.units.sm,
-        borderTopWidth: 1,
-        borderColor: theme.color.secondary,
-        paddingTop: theme.units.md
-
     }
 })
 
@@ -63,8 +51,8 @@ export const formatDigits = (number) => (number / 1000).toFixed(1) + 'k'
 
 export const RepositoryItem = ({ repo }) => {
     return (
-        <View testID="repositoryItem" style={styles.container}>
-            <View style={styles.top}>
+        <View testID="repositoryItem" >
+            <View View style={styles.top} >
                 <View style={styles.imgContainer}><Image source={{ uri: repo.ownerAvatarUrl }} style={styles.img} /></View>
                 <View style={styles.textContainer}>
                     <View style={styles.header}>
@@ -73,7 +61,8 @@ export const RepositoryItem = ({ repo }) => {
                     </View>
                     <Text size={'body2'} color={'lighter'}>{repo.description}</Text>
                 </View>
-            </View>
+            </View >
+            <Separator />
             <View style={styles.footer}>
                 <Pressable onPress={() => Alert.alert(`${repo.stargazersCount} stars ⭐️`)}><Chip>{formatDigits(repo.stargazersCount)} ⭐️</Chip></Pressable>
                 <Pressable onPress={() => Alert.alert(`${repo.forksCount} forks 🔱`)}><Chip>{formatDigits(repo.forksCount)} 🔱</Chip></Pressable>

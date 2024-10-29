@@ -1,6 +1,6 @@
 import { NativeRouter } from "react-router-native";
 import Main from "./src/components/Main";
-import { StatusBar } from "react-native";
+import { Pressable, StatusBar } from "react-native";
 
 import { createApolloClient } from "./src/utils/apolloClient";
 import { ApolloProvider } from "@apollo/client";
