@@ -60,7 +60,7 @@ const validationSchema = yup.object().shape({
         .required('password is required')
 })
 
-const SignInForm = ({ onSubmit, error }) => {
+export const SignInForm = ({ onSubmit, error }) => {
 
     const formik = useFormik({
         initialValues,
