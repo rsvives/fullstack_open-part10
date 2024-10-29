@@ -22,14 +22,22 @@ export const RepositoryList = () => {
     const { repositories, loading } = useRepositories()
 
     return (
-        loading ? <Text style={{ textAlign: 'center', verticalAlign: 'middle', margin: 'auto' }}>Loading...</Text> :
-            <FlatList
-                style={styles.list}
-                data={repositories}
-                renderItem={(item) => <RepositoryItem repo={item.item} />}
-                ItemSeparatorComponent={ItemSeparator}
-                keyExtractor={(item) => item.id}
-            />
+        loading ?
+            <Text style={{ textAlign: 'center', verticalAlign: 'middle', margin: 'auto' }}>Loading...</Text>
+            : <RepositoryContainer repositories={repositories} />
     )
 
+
+}
+
+export const RepositoryContainer = ({ repositories }) => {
+    return (
+        <FlatList
+            style={styles.list}
+            data={repositories}
+            renderItem={(item) => <RepositoryItem repo={item.item} />}
+            ItemSeparatorComponent={ItemSeparator}
+            keyExtractor={(item) => item.id}
+        />
+    )
 }

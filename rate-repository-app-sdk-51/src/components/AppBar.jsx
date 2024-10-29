@@ -9,14 +9,14 @@ import { useLoggedUser } from '../hooks/useLoggedUser';
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: Constants.statusBarHeight,
+        // paddingTop: Constants.statusBarHeight,
         // alignItems: 'flex-start',
         gap: theme.units.md,
         paddingHorizontal: theme.units.md,
         paddingBottom: theme.units.md,
         backgroundColor: theme.color.primary,
         color: theme.textColor.white,
-        // paddingTop: theme.units.lg
+        paddingTop: theme.units.lg
         // ...
     },
     // ...

@@ -59,11 +59,11 @@ const styles = StyleSheet.create({
     }
 })
 
-const formatDigits = (number) => (number / 1000).toFixed(1) + 'k'
+export const formatDigits = (number) => (number / 1000).toFixed(1) + 'k'
 
 export const RepositoryItem = ({ repo }) => {
     return (
-        <View style={styles.container}>
+        <View testID="repositoryItem" style={styles.container}>
             <View style={styles.top}>
                 <View style={styles.imgContainer}><Image source={{ uri: repo.ownerAvatarUrl }} style={styles.img} /></View>
                 <View style={styles.textContainer}>

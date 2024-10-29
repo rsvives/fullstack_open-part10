@@ -36,3 +36,5 @@ yarn-error.*
 
 #package manager
 pnpm-lock.yaml
+
+.env
