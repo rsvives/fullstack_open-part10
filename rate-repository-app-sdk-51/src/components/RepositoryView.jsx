@@ -1,4 +1,4 @@
-import { useParams } from "react-router-native"
+import { useNavigate, useParams } from "react-router-native"
 import * as Linking from 'expo-linking';
 import { useSingleRepository } from "../hooks/useSingleRepository"
 import { RepositoryItem } from "./RepositoryItem"
@@ -6,25 +6,44 @@ import { Separator } from "./Separator"
 import { Pressable, View, StyleSheet, FlatList } from "react-native"
 import { Chip } from "./Chip"
 import { Text } from "./Text";
+import { theme } from "../../theme";
+import { useLoggedUser } from "../hooks/useLoggedUser";
 
-const formatDate = (date) => `${date.getDay()}/${date.getMonth()}/${date.getYear()}`
+const formatDate = (date) => new Date(date).toLocaleDateString('es-es')
 
 const RepositoryInfo = ({ repository }) => {
+    const navigate = useNavigate()
     const style = StyleSheet.create({
         button: {
             alignSelf: 'center',
-            width: '100%',
+            flexGrow: 1,
+            flexShrink: 1,
+            flexBasis: 1,
             maxWidth: 300,
         }
     })
+    const openURL = (url) => {
+        Linking.openURL(url)
+    }
+    const reviewRepo = () => {
+        console.log('reviewing repo', repository)
+        navigate(`/review/${repository.ownerName}/${repository.name}`,)
+    }
+    const { loggedUser } = useLoggedUser()
 
     return (
         <>
             <RepositoryItem repo={repository} />
             <Separator />
-            <Pressable style={style.button} onPress={() => openURL(repository.url)} >
-                <Chip color={'primary'} style={{ textAlign: 'center' }} >Open on Github</Chip>
-            </Pressable>
+            <View style={{ flexDirection: 'row', gap: theme.units.md }}>
+                <Pressable style={style.button} onPress={() => openURL(repository.url)} >
+                    <Chip color={'primary'} style={{ textAlign: 'center' }} >Open on Github</Chip>
+                </Pressable>
+                {loggedUser && <Pressable style={style.button} onPress={reviewRepo} >
+                    <Chip style={{ textAlign: 'center', borderColor: theme.color.primary }} >Review</Chip>
+                </Pressable>
+                }
+            </View>
         </>
     )
 }
@@ -51,17 +70,23 @@ const ReviewItem = ({ review }) => {
         top: {
             flexDirection: 'row',
             justifyContent: 'space-between',
-            alignItems: 'center'
+            alignItems: 'flex-start',
+            marginBottom: theme.units.md,
         }
     })
 
     return (
         <View>
             <View style={style.top}>
-                <Text size={'h3'}>{review.user.username}</Text>
-                <Chip ><Text size={'h4'}>{review.rating}</Text></Chip>
+                <View>
+                    <Text color={'lighter'} size={'caption'}>{formatDate(review.createdAt)}</Text>
+                    <Text size={'h3'}>{review.user.username}</Text>
+                </View>
+                <Chip style={{ display: 'flex', alignItems: 'baseline', flexDirection: 'row' }} >
+                    <Text size={'h4'}>{review.rating}</Text>
+                    {/* <Text style={{ fontSize: 10 }} color={'lighter'}>/100</Text> */}
+                </Chip>
             </View>
-            <Text color={'lighter'} size={'caption'}>{(review.createdAt).toString('dd/mm/yyyy')}</Text>
             <Text>{review.text}</Text>
         </View>
     )
@@ -72,9 +97,6 @@ export const RepositoryView = () => {
     const { id } = useParams()
     const { data, loading, error } = useSingleRepository(id)
 
-    const openURL = (url) => {
-        Linking.openURL(url)
-    }
 
     if (loading) {
         return <Text>Loading...</Text>

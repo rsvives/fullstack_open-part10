@@ -2,8 +2,8 @@ part d :
     ✔ 10.17: @est(30m) test respository container renders all info @started(24-10-29 18:45) @done(24-10-29 18:50) @lasted(5m10s)
     ✔ 10.18: @est(30m) test signin form calls onsubmit @started(24-10-29 19:08) @done(24-10-29 19:34) @lasted(26m43s)
     ✔ 10.19: @est(30m) single repo view with "open in Github" button @started(24-10-29 21:11) @done(24-10-29 23:52) @lasted(2h41m40s)
-    ☐ 10.20: @est(45m) add reviews to  single repo @started(24-10-29 23:52)
-    ☐ 10.21: @est(45m) new review form
+    ✔ 10.20: @est(45m) add reviews to  single repo @done(24-10-30 16:05)
+    ☐ 10.21: @est(45m) new review form @started(24-10-30 16:05)
     ☐ 10.22: @est(30m) sign up form 
     ☐ 10.23: @est(15m) sorting repos
     ☐ 10.24: @est(30m) filtering repos

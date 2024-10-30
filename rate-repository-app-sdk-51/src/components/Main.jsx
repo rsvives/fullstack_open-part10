@@ -9,6 +9,7 @@ import { useSignIn } from '../hooks/useSignIn';
 import { useContext, useEffect } from 'react';
 import { AuthStorageContext } from '../context/AuthStorageContext';
 import { RepositoryView } from './RepositoryView';
+import { ReviewRepositoryView } from './ReviewRepositoryView';
 
 
 const styles = StyleSheet.create({
@@ -28,8 +29,8 @@ const styles = StyleSheet.create({
 
 const Main = () => {
 
-    const match = useMatch('/repositories/:id')
-    const repoId = match?.params.id
+    // const match = useMatch('/repositories/:id')
+    // const repoId = match?.params.id
     return (
 
         <View style={styles.container}>
@@ -39,6 +40,7 @@ const Main = () => {
                     <Route path='/' element={<RepositoryList />} />
                     <Route path='/sign-in' element={<SignIn />} />
                     <Route path="/repositories/:id" element={<RepositoryView />} />
+                    <Route path='/review/:owner/:repository' element={<ReviewRepositoryView />} />
                     <Route path='*' element={<Navigate to={'/'} replace />} />
                 </Routes>
             </View>
