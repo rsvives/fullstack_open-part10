@@ -2,12 +2,13 @@ import * as yup from 'yup'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useNavigate, useParams } from "react-router-native"
 import { Text } from "./Text"
-import { Pressable, StyleSheet, View, TextInput, TouchableWithoutFeedback, Keyboard } from "react-native"
+import { Pressable, StyleSheet, View, TextInput, TouchableWithoutFeedback, Keyboard, Platform } from "react-native"
 import { Chip } from "./Chip"
 import { theme } from "../../theme"
 import { useFormik } from 'formik';
 import { useNewReview } from '../hooks/useNewReview';
 import { useState } from 'react';
+import { SubmitButton } from './SubmitButton';
 
 
 export const ReviewRepositoryView = () => {
@@ -95,7 +96,7 @@ const NewReviewForm = ({ onSubmit, error }) => {
     })
 
     return (
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false} >
+        <TouchableWithoutFeedback onPress={() => { if (Platform.OS !== 'web') { Keyboard.dismiss } }} accessible={false} >
             <View style={styles.card}>
                 <TextInput
                     inputMode='numeric'
@@ -131,7 +132,7 @@ const NewReviewForm = ({ onSubmit, error }) => {
                 {formik.touched.review && formik.errors.review &&
                     <Text color={'error'}>{formik.errors.review}</Text>}
 
-                <Pressable style={[styles.input, styles.buttonPrimary]} onPress={formik.handleSubmit}><Text color={'white'} size={'button'} style={{ textAlign: 'center' }}>Submit</Text></Pressable>
+                <SubmitButton onSubmit={formik.handleSubmit}> Submit </SubmitButton>
                 {error && <Text color={'error'} style={{ textAlign: 'center' }}>{error}</Text>}
             </View>
         </TouchableWithoutFeedback>

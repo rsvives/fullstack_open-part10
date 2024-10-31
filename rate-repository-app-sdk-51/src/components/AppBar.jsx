@@ -10,7 +10,6 @@ import { useLoggedUser } from '../hooks/useLoggedUser';
 const styles = StyleSheet.create({
     container: {
         paddingTop: Constants.statusBarHeight,
-        // alignItems: 'flex-start',
         gap: theme.units.md,
         paddingHorizontal: theme.units.md,
         paddingBottom: theme.units.md,
@@ -25,6 +24,10 @@ export const AppBar = ({ children }) => {
     const { logOut } = useSignIn()
 
     console.log('logged user', loggedUser)
+
+    const links = [
+        { to: '/register', text: 'Register' }
+    ]
 
     return (
         !loadingUser &&
@@ -41,6 +44,7 @@ export const AppBar = ({ children }) => {
                     :
                     <Link to={'/sign-in'}><Chip color={'primary'}>SignIn</Chip></Link>
                 }
+                {links.map((link, index) => <Link key={index} to={link.to} style={{ marginLeft: theme.units.md }}><Chip color={'primary'}>{link.text}</Chip></Link>)}
             </ScrollView>
         </View>
     )

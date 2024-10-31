@@ -7,7 +7,6 @@ export const AUTHENTICATE = gql`
     }
 }
 `
-
 export const CREATE_REVIEW = gql`
     mutation CreateReview($review: CreateReviewInput) {
     createReview(review: $review) {
@@ -21,4 +20,14 @@ export const CREATE_REVIEW = gql`
         }
     }
 }
+`
+
+export const REGISTER = gql`
+    mutation CreateUser($user: CreateUserInput) {
+    createUser(user: $user) {
+        username
+            id
+            createdAt
+        }
+    }
 `

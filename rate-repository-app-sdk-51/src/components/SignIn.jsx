@@ -1,10 +1,12 @@
 import * as yup from 'yup'
-import { View, TextInput, Pressable, StyleSheet } from "react-native";
+import { View, Pressable, StyleSheet } from "react-native";
 import { Text } from "./Text";
+import { TextInput } from './TextInput';
 import { useFormik } from "formik";
 import { theme } from "../../theme";
 import { useSignIn } from '../hooks/useSignIn';
 import { useState } from 'react';
+import { SubmitButton } from './SubmitButton';
 
 
 const styles = StyleSheet.create({
@@ -23,18 +25,6 @@ const styles = StyleSheet.create({
         width: '100%',
         borderWidth: 1,
         borderColor: theme.color.secondary
-    },
-    input: {
-        paddingVertical: theme.units.sm,
-        paddingHorizontal: theme.units.md,
-        borderRadius: theme.units.xs,
-        borderWidth: 1,
-        borderColor: theme.color.secondary
-    },
-    buttonPrimary: {
-        paddingVertical: theme.units.md,
-        backgroundColor: theme.color.primary,
-        borderColor: theme.color.primary,
     },
     inputError: {
         borderColor: theme.color.error
@@ -71,20 +61,20 @@ export const SignInForm = ({ onSubmit, error }) => {
 
     return (
         <View style={styles.container}>
+            <Text size={'h2'} style={{ marginBottom: theme.units.md }}>Sign In</Text>
             <View style={styles.card}>
 
                 <TextInput
                     style={[
-                        styles.input,
                         formik.touched.username && formik.errors.username && styles.inputError
                     ]}
 
-                    inputMode='email'
+                    inputMode='text'
                     placeholder="Username"
                     returnKeyType='next'
                     onSubmitEditing={() => console.log('end ed')
                     }
-                    keyboardType='web-search'
+                    keyboardType='twitter'
                     autoComplete='username'
                     autoFocus
                     value={formik.values.username}
@@ -97,7 +87,6 @@ export const SignInForm = ({ onSubmit, error }) => {
 
                 <TextInput
                     style={[
-                        styles.input,
                         formik.touched.password && formik.errors.password && styles.inputError
                     ]}
                     inputMode='text'
@@ -112,7 +101,7 @@ export const SignInForm = ({ onSubmit, error }) => {
                 {formik.touched.password && formik.errors.password &&
                     <Text color={'error'}>{formik.errors.password}</Text>}
 
-                <Pressable style={[styles.input, styles.buttonPrimary]} onPress={formik.handleSubmit}><Text color={'white'} size={'button'} style={{ textAlign: 'center' }}>Submit</Text></Pressable>
+                <SubmitButton onSubmit={formik.handleSubmit}>Submit</SubmitButton>
                 {error && <Text color={'error'} style={{ textAlign: 'center' }}>{error}</Text>}
             </View>
         </View >

@@ -1,15 +1,13 @@
-import { Route, Routes, Navigate, useMatch } from 'react-router-native';
+import { Route, Routes, Navigate } from 'react-router-native';
 import { StyleSheet, View } from 'react-native';
 import { RepositoryList } from './RepositoryList';
 
 import { theme } from '../../theme';
 import { AppBar } from './AppBar';
 import { SignIn } from './SignIn';
-import { useSignIn } from '../hooks/useSignIn';
-import { useContext, useEffect } from 'react';
-import { AuthStorageContext } from '../context/AuthStorageContext';
 import { RepositoryView } from './RepositoryView';
 import { ReviewRepositoryView } from './ReviewRepositoryView';
+import { RegisterView } from './RegisterView';
 
 
 const styles = StyleSheet.create({
@@ -23,14 +21,11 @@ const styles = StyleSheet.create({
         padding: theme.units.sm,
         backgroundColor: theme.color.surface
     }
-});
+})
 
 
 
 const Main = () => {
-
-    // const match = useMatch('/repositories/:id')
-    // const repoId = match?.params.id
     return (
 
         <View style={styles.container}>
@@ -39,13 +34,14 @@ const Main = () => {
                 <Routes >
                     <Route path='/' element={<RepositoryList />} />
                     <Route path='/sign-in' element={<SignIn />} />
+                    <Route path='/register' element={<RegisterView />} />
                     <Route path="/repositories/:id" element={<RepositoryView />} />
                     <Route path='/review/:owner/:repository' element={<ReviewRepositoryView />} />
                     <Route path='*' element={<Navigate to={'/'} replace />} />
                 </Routes>
             </View>
         </View>
-    );
-};
+    )
+}
 
 export default Main;
