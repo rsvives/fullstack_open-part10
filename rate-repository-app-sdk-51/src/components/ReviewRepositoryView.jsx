@@ -2,7 +2,7 @@ import * as yup from 'yup'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useNavigate, useParams } from "react-router-native"
 import { Text } from "./Text"
-import { Pressable, StyleSheet, View, TextInput } from "react-native"
+import { Pressable, StyleSheet, View, TextInput, TouchableWithoutFeedback, Keyboard } from "react-native"
 import { Chip } from "./Chip"
 import { theme } from "../../theme"
 import { useFormik } from 'formik';
@@ -21,8 +21,8 @@ export const ReviewRepositoryView = () => {
     const handleSubmit = async (values) => {
         console.log('submiting', values)
         const review = {
-            ownerName: "rsvives",
-            repositoryName: "todo-list",
+            ownerName: owner,
+            repositoryName: repository,
             rating: Number(values.rating),
             text: values.review
         }
@@ -95,42 +95,45 @@ const NewReviewForm = ({ onSubmit, error }) => {
     })
 
     return (
-        <View style={styles.card}>
-            <TextInput
-                inputMode='numeric'
-                placeholder='Rating between 0 and 100'
-                returnKeyType='next'
-                keyboardType='numeric'
-                value={formik.values.rating}
-                onChangeText={formik.handleChange('rating')}
-                onBlur={formik.handleBlur('rating')}
-                style={[
-                    styles.input,
-                    formik.touched.rating && formik.errors.rating && styles.inputError
-                ]}
-            />
-            {formik.touched.rating && formik.errors.rating &&
-                <Text color={'error'}>{formik.errors.rating}</Text>}
-            <TextInput
-                multiline={true}
-                inputMode='text'
-                placeholder='Write a review'
-                returnKeyType='default'
-                keyboardType='default'
-                value={formik.values.review}
-                onChangeText={formik.handleChange('review')}
-                onBlur={formik.handleBlur('review')}
-                style={[
-                    styles.input,
-                    formik.touched.review && formik.errors.review && styles.inputError
-                ]}
-            />
-            {formik.touched.review && formik.errors.review &&
-                <Text color={'error'}>{formik.errors.review}</Text>}
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false} >
+            <View style={styles.card}>
+                <TextInput
+                    inputMode='numeric'
+                    placeholder='Rating between 0 and 100'
+                    returnKeyType='next'
+                    keyboardType='numeric'
+                    value={formik.values.rating}
+                    onChangeText={formik.handleChange('rating')}
+                    onBlur={formik.handleBlur('rating')}
+                    style={[
+                        styles.input,
+                        formik.touched.rating && formik.errors.rating && styles.inputError
+                    ]}
+                />
+                {formik.touched.rating && formik.errors.rating &&
+                    <Text color={'error'}>{formik.errors.rating}</Text>}
+                <TextInput
+                    multiline={true}
+                    inputMode='text'
+                    placeholder='Write a review'
+                    returnKeyType='default'
+                    keyboardType='web-search'
+                    value={formik.values.review}
+                    onChangeText={formik.handleChange('review')}
+                    onBlur={formik.handleBlur('review')}
+                    // numberOfLines={3}
+                    style={[
+                        styles.input,
+                        { minHeight: 100 },
+                        formik.touched.review && formik.errors.review && styles.inputError
+                    ]}
+                />
+                {formik.touched.review && formik.errors.review &&
+                    <Text color={'error'}>{formik.errors.review}</Text>}
 
-            <Pressable style={[styles.input, styles.buttonPrimary]} onPress={formik.handleSubmit}><Text color={'white'} size={'button'} style={{ textAlign: 'center' }}>Submit</Text></Pressable>
-            {error && <Text color={'error'} style={{ textAlign: 'center' }}>{error}</Text>}
-
-        </View>
+                <Pressable style={[styles.input, styles.buttonPrimary]} onPress={formik.handleSubmit}><Text color={'white'} size={'button'} style={{ textAlign: 'center' }}>Submit</Text></Pressable>
+                {error && <Text color={'error'} style={{ textAlign: 'center' }}>{error}</Text>}
+            </View>
+        </TouchableWithoutFeedback>
     )
 }
