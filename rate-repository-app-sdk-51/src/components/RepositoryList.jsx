@@ -12,11 +12,10 @@ import { TextInput } from "./TextInput";
 
 const styles = StyleSheet.create({
     separator: {
-        height: 8
+        height: theme.units.sm
     },
     list: {
         width: '100%',
-        // marginTop: theme.units.md
     }
 
 })
@@ -26,7 +25,7 @@ export const SORTING_OPTIONS = {
     HIGHEST_RANKED: 'Highest rated repositories',
     LOWEST_RANKED: 'Lowest rated repositories'
 }
-const SortingContext = createContext()
+export const SortingContext = createContext()
 
 const filteringReducer = (state, action) => {
     switch (action.type) {
@@ -182,9 +181,8 @@ const CustomSearchBar = () => {
 
     const { state, dispatch } = useContext(SortingContext)
 
-    const handleChange = (event) => {
-        console.log(event)
-        dispatch({ type: 'search', search: event })
+    const handleChange = (text) => {
+        dispatch({ type: 'search', search: text })
     }
     return (
         <View style={{ flexGrow: 1, flexBasis: 300, flexShrink: 1 }}>
@@ -193,40 +191,6 @@ const CustomSearchBar = () => {
                 placeholder={'Search a repository...'}
                 onChangeText={handleChange}
             />
-
         </View>
     )
 }
-
-// const CustomPicker = () => {
-//     const [selectedLanguage, setSelectedLanguage] = useState('')
-//     const pickerRef = useRef();
-
-//     function open() {
-//         console.log('opening thing')
-//         pickerRef.current.focus();
-//     }
-
-//     function close() {
-//         pickerRef.current.blur();
-//     }
-//     useEffect(close, [])
-
-//     return (
-//         <>
-//             <Pressable onPress={close}><Text>Select</Text></Pressable>
-//             <Picker
-//                 prompt="Select an option"
-//                 ref={pickerRef}
-//                 selectedValue={selectedLanguage}
-//                 onValueChange={(itemValue, itemIndex) => {
-//                     setSelectedLanguage(itemValue)
-//                     console.log(itemValue)
-//                 }
-//                 }>
-//                 <Picker.Item label="Java" value="java" />
-//                 <Picker.Item label="JavaScript" value="js" />
-//             </Picker>
-//         </>
-//     )
-// }
