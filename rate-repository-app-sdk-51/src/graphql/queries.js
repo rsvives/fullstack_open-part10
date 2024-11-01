@@ -45,10 +45,18 @@ export const GET_USERS = gql`
 `
 
 export const ME = gql`
-query Me{
-  me {
-    id
-    username
+query getCurrentUser($includeReviews: Boolean = false) {
+    me {
+      id
+      username
+      reviews @include(if: $includeReviews) {
+        edges {
+          node {
+            ...ReviewDetails
+          }
+        }
+      }
+    }
   }
-}
+${REVIEW_DETAILS}
 `

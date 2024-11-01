@@ -8,6 +8,7 @@ import { SignIn } from './SignIn';
 import { RepositoryView } from './RepositoryView';
 import { ReviewRepositoryView } from './ReviewRepositoryView';
 import { RegisterView } from './RegisterView';
+import { UserReviews } from './UserReviews';
 
 
 const styles = StyleSheet.create({
@@ -36,6 +37,7 @@ const Main = () => {
                     <Route path='/sign-in' element={<SignIn />} />
                     <Route path='/register' element={<RegisterView />} />
                     <Route path="/repositories/:id" element={<RepositoryView />} />
+                    <Route path="/my-reviews" element={<UserReviews />} />
                     <Route path='/review/:owner/:repository' element={<ReviewRepositoryView />} />
                     <Route path='*' element={<Navigate to={'/'} replace />} />
                 </Routes>

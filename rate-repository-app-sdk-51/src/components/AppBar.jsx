@@ -26,26 +26,32 @@ export const AppBar = ({ children }) => {
     console.log('logged user', loggedUser)
 
     const links = [
-        { to: '/register', text: 'Register' }
+        { to: '/', text: 'Repositories', auth: false },
+        { to: '/my-reviews', text: 'My Reviews', auth: true },
+
     ]
 
     return (
         !loadingUser &&
         <View style={styles.container}>
-            {/* <Text>{JSON.stringify(loggedUser)}</Text> */}
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: theme.units.lg }}>
                 <Text size={'h1'} color={'white'} >Github Repos 🚀⚛️</Text>
                 {loggedUser && <Text color={'white'}>{loggedUser?.username}</Text>}
             </View>
-            <ScrollView horizontal >
-                <Link to={'/'} style={{ marginRight: theme.units.md }}><Chip color={'primary'}>Repositories</Chip></Link>
-                {loggedUser ?
-                    <Pressable onPress={() => logOut()}><Chip color={'primary'}>Log out</Chip></Pressable>
-                    :
-                    <Link to={'/sign-in'}><Chip color={'primary'}>SignIn</Chip></Link>
-                }
-                {links.map((link, index) => <Link key={index} to={link.to} style={{ marginLeft: theme.units.md }}><Chip color={'primary'}>{link.text}</Chip></Link>)}
-            </ScrollView>
-        </View>
+            <View style={{ flexDirection: 'row', gap: theme.units.md }}>
+                <ScrollView horizontal >
+                    {links.map((link, index) => (!link.auth || link.auth && loggedUser) && <Link key={index} to={link.to} style={{ marginRight: theme.units.md }}><Chip color={'primary'}>{link.text}</Chip></Link>)}
+                </ScrollView>
+                <View style={{ flexDirection: 'row', gap: theme.units.md }}>
+                    {!loggedUser && <Link to='/register' style={{ marginLeft: theme.units.md }}><Chip color={'primary'}>Register</Chip></Link>}
+                    {loggedUser ?
+                        <Pressable onPress={() => logOut()}><Chip color={'primary'}>Log out</Chip></Pressable>
+                        :
+                        <Link to={'/sign-in'}><Chip color={'primary'}>SignIn</Chip></Link>
+                    }
+
+                </View>
+            </View>
+        </View >
     )
 };

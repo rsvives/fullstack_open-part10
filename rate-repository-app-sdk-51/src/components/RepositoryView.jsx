@@ -52,7 +52,6 @@ const ReviewsContainer = ({ reviews }) => {
 
     return (
         <FlatList
-            // ListHeaderComponent={<RepositoryInfo repository={repository} />}
             keyExtractor={(r) => r.id}
             data={reviews}
             renderItem={(review) => <ReviewItem review={review.item} />}
@@ -61,7 +60,7 @@ const ReviewsContainer = ({ reviews }) => {
     )
 }
 
-const ReviewItem = ({ review }) => {
+export const ReviewItem = ({ review, children }) => {
 
     const style = StyleSheet.create({
         container: {
@@ -88,6 +87,7 @@ const ReviewItem = ({ review }) => {
                 </Chip>
             </View>
             <Text>{review.text}</Text>
+            {children}
         </View>
     )
 }

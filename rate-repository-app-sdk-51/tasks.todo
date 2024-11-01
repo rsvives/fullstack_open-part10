@@ -5,8 +5,8 @@ part d :
     ✔ 10.20: @est(45m) add reviews to  single repo @done(24-10-30 16:05)
     ✔ 10.21: @est(45m) new review form @started(24-10-30 16:05) @done(24-10-31 15:24) @lasted(23h19m25s)
     ✔ 10.22: @est(30m) sign up form @done(24-10-31 15:24)
-    ☐ 10.23: @est(15m) sorting repos @started(24-10-31 15:24)
-    ☐ 10.24: @est(30m) filtering repos
-    ☐ 10.25: @est(30m) logged user review view
+    ✔ 10.23: @est(15m) sorting repos @started(24-10-31 15:24) @done(24-11-01 14:06) @lasted(22h42m7s)
+    ✔ 10.24: @est(30m) filtering repos @done(24-11-01 14:06)
+    ☐ 10.25: @est(30m) logged user review view @started(24-11-01 16:01)
     ☐ 10.26: @est(15m) reviews actions (view & delete)
     ☐ 10.27: @est(30m) Infinite scroll 
