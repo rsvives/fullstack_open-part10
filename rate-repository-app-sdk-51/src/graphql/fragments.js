@@ -22,6 +22,7 @@ fragment ReviewDetails on Review{
           text
           rating
           createdAt
+          repositoryId
           user {
             id
             username

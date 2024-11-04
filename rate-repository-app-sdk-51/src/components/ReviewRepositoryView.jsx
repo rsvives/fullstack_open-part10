@@ -6,7 +6,7 @@ import { Pressable, StyleSheet, View, TextInput, TouchableWithoutFeedback, Keybo
 import { Chip } from "./Chip"
 import { theme } from "../../theme"
 import { useFormik } from 'formik';
-import { useNewReview } from '../hooks/useNewReview';
+import { useReviews } from '../hooks/useReviews';
 import { useState } from 'react';
 import { SubmitButton } from './SubmitButton';
 
@@ -15,7 +15,7 @@ export const ReviewRepositoryView = () => {
     const params = useParams()
     const { owner, repository } = params
     const navigate = useNavigate()
-    const { createNewReview } = useNewReview()
+    const { createNewReview } = useReviews()
     const [error, setError] = useState(null)
 
     // const [error, setError] = useState(null)

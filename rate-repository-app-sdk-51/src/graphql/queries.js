@@ -53,6 +53,10 @@ query getCurrentUser($includeReviews: Boolean = false) {
         edges {
           node {
             ...ReviewDetails
+            repository {
+              id
+              url
+            }
           }
         }
       }

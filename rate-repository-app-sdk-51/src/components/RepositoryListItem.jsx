@@ -12,7 +12,7 @@ export const RepositoryListItem = ({ item }) => {
     })
     return (
 
-        <Pressable onPress={() => navigate(`/repositories/${item.id}`, { replace: true })}>
+        <Pressable onPress={() => navigate(`/repositories/${item.id}`, { replace: false })}>
             <Card>
                 <RepositoryItem repo={item} />
             </Card>

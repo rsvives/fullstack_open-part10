@@ -54,13 +54,13 @@ const ReviewsContainer = ({ reviews }) => {
         <FlatList
             keyExtractor={(r) => r.id}
             data={reviews}
-            renderItem={(review) => <ReviewItem review={review.item} />}
+            renderItem={(review) => <ReviewItem title={review.item.user.username} review={review.item} />}
             ItemSeparatorComponent={<Separator />}
         />
     )
 }
 
-export const ReviewItem = ({ review, children }) => {
+export const ReviewItem = ({ title, review, children }) => {
 
     const style = StyleSheet.create({
         container: {
@@ -79,7 +79,7 @@ export const ReviewItem = ({ review, children }) => {
             <View style={style.top}>
                 <View>
                     <Text color={'lighter'} size={'caption'}>{formatDate(review.createdAt)}</Text>
-                    <Text size={'h3'}>{review.user.username}</Text>
+                    <Text size={'h3'}>{title}</Text>
                 </View>
                 <Chip style={{ display: 'flex', alignItems: 'baseline', flexDirection: 'row' }} >
                     <Text size={'h4'}>{review.rating}</Text>
@@ -95,6 +95,7 @@ export const ReviewItem = ({ review, children }) => {
 export const RepositoryView = () => {
 
     const { id } = useParams()
+    console.log('id', id)
     const { data, loading, error } = useSingleRepository(id)
 
 
